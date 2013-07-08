@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+#
+# Cookbook Name:: lb_nginx
+#
+# Copyright Scorpio Media. All rights reserved.
+
+set -e
+shopt -s nullglob
+
+FILES="/etc/nginx/vhosts/*.def"
+IFS_BACKUP=$IFS
+IFS=$'\n'
+
+for f in $FILES
+do
+  filename=`basename $f _upstream.def`
+  CONF_FILE="/etc/nginx/conf.d/${filename}_upstream.conf"
+
+  echo "creating upstream config file $CONF_FILE";
+  echo "upstream $filename {" > ${CONF_FILE}
+  echo "  ip_hash;" >> ${CONF_FILE}
+
+  LINES=$(<"$f")
+  for line in $LINES
+  do
+    echo "  $line" >> ${CONF_FILE}
+  done
+  echo "}" >> ${CONF_FILE}
+done
+IFS=$IFS_BACKUP
