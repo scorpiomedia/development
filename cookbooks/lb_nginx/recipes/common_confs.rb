@@ -10,4 +10,5 @@ template "nginx.conf" do
   mode 00644
   notifies :reload, 'service[nginx]'
 end
+
 rightscale_marker :end

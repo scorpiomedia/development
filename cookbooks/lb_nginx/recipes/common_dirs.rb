@@ -18,12 +18,12 @@ directory node[:lb_nginx][:etc_dir] do
   recursive true
 end
 
-directory node[:lb_nginx][:log_dir] do
-  mode 00755
-  owner node[:lb_nginx]['user']
-  action :create
-  recursive true
-end
+#directory node[:lb_nginx][:log_dir] do
+#  mode 00755
+#  owner node[:lb_nginx][:user]
+#  action :create
+#  recursive true
+#end
 
 #directory node[:lb_nginx][:www_dir] do
 #  mode 00755

@@ -21,8 +21,8 @@ log " Creating common scripts"
 end
 
 cookbook_file "/etc/nginx/generate_upstream_config" do
-  owner "www-data"
-  group "www-data"
+  owner "root"
+  group "root"
   mode "0755"
   source "generate_upstream_config"
   cookbook "lb_nginx"
