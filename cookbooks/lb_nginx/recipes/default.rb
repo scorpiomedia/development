@@ -6,3 +6,16 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+
+rightscale_marker :begin
+
+class Chef::Recipe
+  include RightScale::App::Helper
+end
+
+log "  Override load balancer to use HAProxy."
+node[:lb][:service][:provider] = "lb_haproxy"
+
+include_recipe 'lb_nginx::commons'
+
+rightscale_marker :end
