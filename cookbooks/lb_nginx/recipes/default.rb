@@ -16,6 +16,4 @@ end
 log "  Override load balancer to use HAProxy."
 node[:lb][:service][:provider] = "lb_haproxy"
 
-include_recipe 'lb_nginx::commons'
-
 rightscale_marker :end
