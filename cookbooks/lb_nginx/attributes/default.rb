@@ -21,6 +21,12 @@ default[:lb_nginx][:worker_processes] = node[:cpu] && node[:cpu][:total] ? node[
 default[:lb_nginx][:worker_rlimit_nofile] = 1024
 default[:lb_nginx][:worker_connections] = 1024
 default[:lb_nginx][:multi_accept] = "off"
+
+default["nginx"]["log_format"] = <<-FORMAT
+  '$remote_addr $host $remote_user [$time_local] "$request" '
+  '$status $body_bytes_sent "$http_referer" "$http_user_agent" "$gzip_ratio"'
+FORMAT
+
 default[:lb_nginx][:sendfile] = "on"
 default[:lb_nginx][:tcp_nopush] = "on"
 default[:lb_nginx][:tcp_nodelay] = "on"
